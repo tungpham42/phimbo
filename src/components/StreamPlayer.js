@@ -5,22 +5,42 @@ import { Container, Button } from "react-bootstrap";
 
 const StreamPlayer = () => {
   const { id, season, episode } = useParams();
-  const [show, setShow] = useState([]);
+  const [show, setShow] = useState({});
+  const [totalEpisodes, setTotalEpisodes] = useState(0);
   const embedUrl = `https://hoc.cotuong.top/se_player.php?video_id=${id}&tmdb=1&s=${season}&e=${episode}`;
 
-  const API_KEY = "fecb69b9d0ad64dbe0802939fafc338d"; // Replace with your TMDB API Key
+  const API_KEY = "fecb69b9d0ad64dbe0802939fafc338d";
   const BASE_URL = "https://api.themoviedb.org/3";
 
   useEffect(() => {
     const fetchTVShow = async () => {
-      const response = await axios.get(`${BASE_URL}/tv/${id}`, {
-        params: { api_key: API_KEY, language: "vi" },
-      });
-      setShow(response.data);
+      try {
+        const response = await axios.get(`${BASE_URL}/tv/${id}`, {
+          params: { api_key: API_KEY, language: "vi" },
+        });
+        setShow(response.data);
+      } catch (error) {
+        console.error("Error fetching TV show details:", error);
+      }
+    };
+
+    const fetchSeasonDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/tv/${id}/season/${season}`,
+          {
+            params: { api_key: API_KEY, language: "vi" },
+          }
+        );
+        setTotalEpisodes(response.data.episodes.length);
+      } catch (error) {
+        console.error("Error fetching season details:", error);
+      }
     };
 
     fetchTVShow();
-  }, [id]);
+    fetchSeasonDetails();
+  }, [id, season]);
 
   return (
     <Container className="mt-4 text-center">
@@ -42,6 +62,11 @@ const StreamPlayer = () => {
         <Link to="/">
           <Button variant="secondary">Quay về trang chủ</Button>
         </Link>
+        {episode < totalEpisodes && (
+          <Link to={`/xem/${id}/${season}/${parseInt(episode) + 1}`}>
+            <Button variant="primary">Tập tiếp theo</Button>
+          </Link>
+        )}
       </div>
     </Container>
   );

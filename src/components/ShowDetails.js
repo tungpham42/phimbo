@@ -93,7 +93,7 @@ const ShowDetails = () => {
                 {season.episodes.map((episode) => (
                   <ListGroup.Item key={episode.id}>
                     <Link
-                      to={`/chieu-phim/${id}/${season.season_number}/${episode.episode_number}`}
+                      to={`/xem/${id}/${season.season_number}/${episode.episode_number}`}
                     >
                       <Button variant="outline-primary" size="sm">
                         Tập {episode.episode_number}: {episode.name}

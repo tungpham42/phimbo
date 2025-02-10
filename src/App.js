@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ShowList />} />
         <Route path="/chi-tiet/:id" element={<ShowDetails />} />
-        <Route path="/chieu-phim/:id/:season/:episode" element={<StreamPlayer />} />
+        <Route path="/xem/:id/:season/:episode" element={<StreamPlayer />} />
       </Routes>
     </Router>
   );
