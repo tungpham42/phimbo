@@ -25,7 +25,7 @@ const StreamPlayer = () => {
   return (
     <Container className="mt-4 text-center">
       <h2 className="mb-3">
-        Phim "{show.name}" Chiếu Tập {episode} (Mùa {season})
+        Phim "{show.name}" - Tập {episode} (Mùa {season})
       </h2>
       <iframe
         src={embedUrl}
