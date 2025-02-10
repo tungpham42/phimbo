@@ -10,16 +10,18 @@ import {
   ListGroup,
   Accordion,
 } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faTv, faListUl } from "@fortawesome/free-solid-svg-icons";
 
-const API_KEY = "fecb69b9d0ad64dbe0802939fafc338d"; // Replace with your TMDB API Key
-const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const ShowDetails = () => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [seasons, setSeasons] = useState([]); // Store season and episode data
+  const [seasons, setSeasons] = useState([]);
 
   const fetchShowDetails = useCallback(async () => {
     try {
@@ -28,7 +30,6 @@ const ShowDetails = () => {
       });
       setShow(response.data);
 
-      // Fetch each season’s details to get the exact episode count
       const seasonPromises = response.data.seasons.map((season) =>
         axios.get(`${BASE_URL}/tv/${id}/season/${season.season_number}`, {
           params: { api_key: API_KEY, language: "vi" },
@@ -56,7 +57,10 @@ const ShowDetails = () => {
 
   return (
     <Container className="mt-4 col-md-6">
-      <h2 className="mb-3">{show.name}</h2>
+      <h2 className="mb-3">
+        <FontAwesomeIcon icon={faTv} className="me-2" />
+        {show.name}
+      </h2>
       <p>{show.overview || "No description available."}</p>
       <Image
         src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
@@ -67,7 +71,9 @@ const ShowDetails = () => {
       />
 
       {/* Seasons and Episodes Info */}
-      <h4 className="mt-4">Mùa & Tập</h4>
+      <h4 className="mt-4">
+        <FontAwesomeIcon icon={faListUl} className="me-2" /> Mùa & Tập
+      </h4>
       <ListGroup className="mb-3">
         <ListGroup.Item>
           <strong>Số Mùa:</strong> {show.number_of_seasons}
@@ -96,6 +102,7 @@ const ShowDetails = () => {
                       to={`/xem/${id}/${season.season_number}/${episode.episode_number}`}
                     >
                       <Button variant="outline-primary" size="sm">
+                        <FontAwesomeIcon icon={faTv} className="me-2" />
                         Tập {episode.episode_number}: {episode.name}
                       </Button>
                     </Link>
@@ -106,9 +113,11 @@ const ShowDetails = () => {
           </Accordion.Item>
         ))}
       </Accordion>
+
+      {/* Back to Home Button */}
       <Link to="/">
         <Button variant="secondary" className="mb-5">
-          Quay về trang chủ
+          <FontAwesomeIcon icon={faHome} className="me-2" /> Quay về trang chủ
         </Button>
       </Link>
     </Container>

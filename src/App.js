@@ -4,7 +4,7 @@ import ShowList from "./components/ShowList";
 import ShowDetails from "./components/ShowDetails";
 import StreamPlayer from "./components/StreamPlayer";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
@@ -14,6 +14,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
