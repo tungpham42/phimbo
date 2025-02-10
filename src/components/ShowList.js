@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faTv } from "@fortawesome/free-solid-svg-icons";
 import DefaultPagination from "./DefaultPagination";
 import ShowSearch from "./ShowSearch";
 
@@ -69,7 +69,7 @@ const ShowList = () => {
   return (
     <Container className="mt-4">
       <h2 className="mb-4">
-        <FontAwesomeIcon icon={faFilm} className="me-2" /> Phim bộ
+        <FontAwesomeIcon icon={faTv} className="me-2" /> Phim bộ
       </h2>
       <ShowSearch
         onSearch={handleSearch}
@@ -128,8 +128,7 @@ const ShowList = () => {
                     className="mt-auto d-flex justify-content-start text-decoration-none"
                   >
                     <Button variant="primary">
-                      <FontAwesomeIcon icon={faFilm} className="me-2" /> Xem
-                      Phim
+                      <FontAwesomeIcon icon={faTv} className="me-2" /> Xem Phim
                     </Button>
                   </Link>
                 </Card.Body>
