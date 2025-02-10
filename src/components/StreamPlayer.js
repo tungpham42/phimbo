@@ -18,12 +18,15 @@ const StreamPlayer = () => {
         allowFullScreen
         title={`Tập ${episode} Mùa ${season}`}
         style={{ border: "none" }}
-      ></iframe>
-      <Link to="/">
-        <Button variant="secondary" className="mb-5">
-          Quay về trang chủ
-        </Button>
-      </Link>
+      />
+      <div className="d-flex justify-content-center gap-3 my-5">
+        <Link to={`/chi-tiet/${id}`}>
+          <Button variant="secondary">Quay về phim</Button>
+        </Link>
+        <Link to="/">
+          <Button variant="secondary">Quay về trang chủ</Button>
+        </Link>
+      </div>
     </Container>
   );
 };

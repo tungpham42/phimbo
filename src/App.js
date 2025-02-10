@@ -9,8 +9,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<ShowList />} />
-        <Route path="/show/:id" element={<ShowDetails />} />
-        <Route path="/stream/:id/:season/:episode" element={<StreamPlayer />} />
+        <Route path="/chi-tiet/:id" element={<ShowDetails />} />
+        <Route path="/chieu-phim/:id/:season/:episode" element={<StreamPlayer />} />
       </Routes>
     </Router>
   );
