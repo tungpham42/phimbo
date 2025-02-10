@@ -1,16 +1,18 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Col, Form, FormControl, Button, Spinner, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faUndo } from "@fortawesome/free-solid-svg-icons";
 
-const ShowSearch = ({ onSearch, onReset }) => {
+const ShowSearch = ({ onSearch, onReset, originalLanguage }) => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSearch = useCallback(() => {
-    if (!query.trim()) return;
-    setLoading(true);
-    onSearch(query.trim());
+    if (query.trim()) {
+      setLoading(true);
+      onSearch(query.trim());
+      setTimeout(() => setLoading(false), 1500);
+    }
   }, [query, onSearch]);
 
   const handleReset = useCallback(() => {
@@ -18,6 +20,10 @@ const ShowSearch = ({ onSearch, onReset }) => {
     setLoading(false);
     onReset();
   }, [onReset]);
+
+  useEffect(() => {
+    setQuery(""); // Clear search input when originalLanguage changes
+  }, [originalLanguage]);
 
   return (
     <Row className="align-items-center mb-3">

@@ -37,8 +37,8 @@ const ShowList = () => {
           api_key: API_KEY,
           page: currentPage,
           language: "vi",
-          with_original_language: originalLanguage || undefined,
-          query: searchQuery || undefined, // Only include in search mode
+          with_original_language: originalLanguage || "",
+          query: searchQuery || "",
         },
       });
       setShows(data.results);
@@ -67,14 +67,21 @@ const ShowList = () => {
   return (
     <Container className="mt-4">
       <h2 className="mb-4">Phim bộ</h2>
-      <ShowSearch onSearch={handleSearch} onReset={handleReset} />
+      <ShowSearch
+        onSearch={handleSearch}
+        onReset={handleReset}
+        originalLanguage={originalLanguage}
+      />
 
       {/* Language Selection Dropdown */}
       <Form.Group className="mb-3">
         <Form.Label>Chọn ngôn ngữ gốc</Form.Label>
         <Form.Select
           value={originalLanguage}
-          onChange={(e) => setOriginalLanguage(e.target.value)}
+          onChange={(e) => {
+            setOriginalLanguage(e.target.value);
+            setSearchQuery(""); // Clear search query when language changes
+          }}
         >
           <option value="">Tất cả</option>
           <option value="vi">Tiếng Việt</option>
