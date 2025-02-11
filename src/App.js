@@ -9,7 +9,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<ShowList />} />
-        <Route path="/chi-tiet/:id" element={<ShowDetails />} />
+        <Route path="/phim/:id" element={<ShowDetails />} />
         <Route path="/xem/:id/:season/:episode" element={<StreamPlayer />} />
       </Routes>
     </Router>

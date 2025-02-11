@@ -98,7 +98,7 @@ const StreamPlayer = () => {
 
       {/* Back to Movie & Home Buttons */}
       <div className="d-flex justify-content-center gap-3 mt-3 mb-5">
-        <Link to={`/chi-tiet/${id}`}>
+        <Link to={`/phim/${id}`}>
           <Button variant="secondary">
             <FontAwesomeIcon icon={faUndo} className="me-2" />
             Quay về phim
